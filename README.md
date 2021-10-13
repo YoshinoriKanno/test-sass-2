@@ -35,6 +35,7 @@ npm init -y
 上記コマンドで作業ディレクトリのルートに package.json が作成されます。
 
 ```json
+// package.json
 {
   "name": "test-sass",
   "version": "1.0.0",
@@ -63,7 +64,7 @@ npm init -y
 npm install sass
 ```
 
-ルートに node_modules というディレクトリができて、モジュール群がインストールされます。
+開発環境ルート（ `~/Downloads/test-sass` 以降はこちらのディレクトリを開発環境ルートと呼ぶ）に node_modules というディレクトリができて、モジュール群がインストールされます。
 
 また、 package.json が下記のように書き換えられました。
 
@@ -77,3 +78,61 @@ npm install sass
 ```
 
 dependencies というオブジェクトで依存関係を管理します。
+
+# 5. 実際に Sass を動かしてみる
+
+では、実際に Sass を動かしてみましょう。
+
+開発環境ルート直下に input.scss を作成します。
+
+```css
+/* input.scss */
+.test {
+  &--block {
+    display: flex;
+    justify-content: center;
+  }
+}
+```
+
+実行コマンド
+
+```css
+sass --watch input.scss:output.css
+```
+
+基本形はこちらになります。
+output.css と output.css.map が生成されます。
+
+```css
+/* output.css */
+.test--block {
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=output.css.map */
+```
+
+CSS の整形がいつもみている形と違います。
+いつものフォーマットで整形する場合は `--style=expanded` をつけます。
+
+一度、sass watch を `control + C` で止め、下記コマンドを実行します。
+
+```
+sass --style=expanded --watch input.scss:output.css
+```
+
+input.scss を保存すると下記ファイルが生成されます。
+
+```css
+/* output.css */
+.test--block {
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=output.css.map */
+```
+
+いつものフォーマットですね。
