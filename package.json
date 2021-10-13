@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/YoshinoriKanno/test-sass-2/issues"
   },
-  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme"
+  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme",
+  "dependencies": {
+    "sass": "^1.42.1"
+  }
 }

@@ -1,6 +1,6 @@
 # test-sass
 
-npm-scripts で SASS を動かすハンズオンです。
+npm-scripts で Sass を動かすハンズオンです。
 
 # 1. 作業ディレクトリの作成
 
@@ -56,3 +56,24 @@ npm init -y
   "homepage": "https://github.com/YoshinoriKanno/test-sass#readme"
 }
 ```
+
+# 4. Dart Sass のインストール
+
+```shell
+npm install sass
+```
+
+ルートに node_modules というディレクトリができて、モジュール群がインストールされます。
+
+また、 package.json が下記のように書き換えられました。
+
+```diff
+-  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme"
++  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme",
++  "dependencies": {
++    "sass": "^1.42.1"
++  }
+
+```
+
+dependencies というオブジェクトで依存関係を管理します。
