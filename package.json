@@ -1,0 +1,20 @@
+{
+  "name": "test-sass-2",
+  "version": "1.0.0",
+  "description": "npm-scripts で SASS を動かすハンズオンです。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoshinoriKanno/test-sass-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YoshinoriKanno/test-sass-2/issues"
+  },
+  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme"
+}
