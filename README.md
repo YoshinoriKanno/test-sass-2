@@ -37,25 +37,19 @@ npm init -y
 ```json
 // package.json
 {
+{
   "name": "test-sass",
   "version": "1.0.0",
-  "description": "npm-scripts で SASS を動かすハンズオンです。",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YoshinoriKanno/test-sass.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/YoshinoriKanno/test-sass/issues"
-  },
-  "homepage": "https://github.com/YoshinoriKanno/test-sass#readme"
+  "license": "ISC"
 }
+
 ```
 
 # 4. Dart Sass のインストール
@@ -66,20 +60,17 @@ npm install sass
 
 開発環境ルート（ `~/Downloads/test-sass` 以降はこちらのディレクトリを開発環境ルートと呼ぶ）に node_modules というディレクトリができて、モジュール群がインストールされます。
 
-また、 package.json が下記のように書き換えられました。
+また、 package.json が下記のように書き加えられました。
 
 ```diff
--  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme"
-+  "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme",
-+  "dependencies": {
-+    "sass": "^1.42.1"
++ "dependencies": {
++   "sass": "^1.42.1"
 +  }
-
 ```
 
 dependencies というオブジェクトで依存関係を管理します。
 
-# 5. 実際に Sass を動かしてみる
+# 5. 実際に Sass を動かしてみる　基本編
 
 では、実際に Sass を動かしてみましょう。
 
@@ -114,7 +105,7 @@ output.css と output.css.map が生成されます。
 /*# sourceMappingURL=output.css.map */
 ```
 
-CSS の整形がいつもみている形と違います。
+CSS の整形がいつもみている形と違うかもしれません。
 いつものフォーマットで整形する場合は `--style=expanded` をつけます。
 
 一度、sass watch を `control + C` で止め、下記コマンドを実行します。
@@ -136,3 +127,21 @@ input.scss を保存すると下記ファイルが生成されます。
 ```
 
 いつものフォーマットですね。
+
+# 6. 実際に Sass を動かしてみる　応用編 1
+
+ディレクトリ構造をが下記のような場合はの指定方法は、
+
+```
+.
+├── src
+│   └── input.scss
+└── styles
+    └── output.css
+```
+
+下記のようになります。
+
+```
+sass --style=expanded --watch src/input.scss:styles/output.css
+```
