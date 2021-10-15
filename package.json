@@ -18,6 +18,14 @@
   },
   "homepage": "https://github.com/YoshinoriKanno/test-sass-2#readme",
   "dependencies": {
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9",
+    "postcss-cli": "^9.0.1",
     "sass": "^1.42.1"
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 11",
+    "Android >= 4"
+  ]
 }

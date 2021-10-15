@@ -191,8 +191,87 @@ sass --style=expanded --watch src/input.scss:styles/output.css
 
 ## コンパイル
 
-```
+```shell
 sass --style=expanded --watch src:styles
 ```
 
 上記コマンドを実行すると作業フォルダに `styles` というフォルダが作られて、中に `main.css` というフィいるが作られました。
+
+# 8. autoprefixer の実行
+
+autoprefixer は Can I Use の値を使って CSS を解析し、CSS ルールにベンダープレフィックスを追加する PostCSS プラグインです。
+
+## インストール
+
+下記コマンドで autoprefixer をインストールします。
+
+```shell
+npm install postcss postcss-cli autoprefixer
+```
+
+autoprefixer を npm Scripts で使う場合、postcss, postcss-cli に依存関係があるので postcss, postcss-cli も一緒にインストールしています。
+
+実行すると各種パッケージがダウンロードされて package.json が書き換えれます。
+
+```diff
++  "autoprefixer": "^10.3.7",
++  "postcss": "^8.3.9",
++  "postcss-cli": "^9.0.1",
+```
+
+## package.json にブラウザリストを追記する
+
+```diff
++   "browserslist": [
++     "last 2 versions",
++     "ie >= 11",
++     "Android >= 4"
++   ]
+```
+
+## autoprefixer を実行する
+
+実行コマンドはこちらです。
+
+```shell
+npx postcss styles/**/*.css --use autoprefixer --replace
+```
+
+```css
+// styles/main.css
+.export {
+  text-align: center;
+}
+
+.test--block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9fZXhwb3J0LnNjc3MiLCJtYWluLmNzcyIsIi4uL3NyYy9tYWluLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDRSxrQkFBa0I7QUNBcEI7O0FDRUU7RUFDRSxvQkFBYTtFQUFiLG9CQUFhO0VBQWIsYUFBYTtFQUNiLHdCQUF1QjtNQUF2QixxQkFBdUI7VUFBdkIsdUJBQXVCO0FEQzNCIiwiZmlsZSI6Im1haW4uY3NzIn0= */
+```
+
+autoprefixer をかける前
+
+```css
+.export {
+  text-align: center;
+}
+
+.test--block {
+  display: flex;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=main.css.map */
+```
+
+map が不要な場合は --no-map オプションをつけます。
+
+```
+npx postcss styles/**/*.css --use autoprefixer --replace --no-map
+```
