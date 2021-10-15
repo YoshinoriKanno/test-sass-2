@@ -1,4 +1,6 @@
 // input.scss
+@import "export";
+
 .test {
   &--block {
     display: flex;

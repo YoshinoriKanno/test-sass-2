@@ -154,24 +154,45 @@ sass --style=expanded --watch src/input.scss:styles/output.css
 
 # 6. 実際に Sass を動かしてみる　応用編 2
 
-ディレクトリ構造を想定した場合はどのように指定すれば良いのでしょうか。
+では、下記のようなディレクトリ構造を想定した場合はどのように指定すれば良いのでしょうか。
+みなさんが、通常プロジェクトや特集などで使っている出るフォルダ構成に近い形です。
 
 ```
 .
 ├── src
-│   └── input.scss
+│   ├── main.scss
+│   └── _export.scss
 └── styles
-    └── output.css
+    └── main.css
 ```
 
 ## Sass ファイルの作成
 
-作業フォルダに `src` というフォルダを作って `input.scss` というファイルを作ります。
+作業フォルダに `src` というフォルダを作って `main.scss` と `_export.scss` というファイルを作ります。
+
+```css
+// input.scss
+@import "export";
+
+.test {
+  &--block {
+    display: flex;
+    justify-content: center;
+  }
+}
+```
+
+```css
+// _export.scss
+.export {
+  text-align: center;
+}
+```
 
 ## コンパイル
 
 ```
-sass --style=expanded --watch src/input.scss:styles/output.css
+sass --style=expanded --watch src:styles
 ```
 
-上記コマンドを実行すると作業フォルダに `styles` というフォルダが作られて、中に `output.css` というフィいるが作られました。
+上記コマンドを実行すると作業フォルダに `styles` というフォルダが作られて、中に `main.css` というフィいるが作られました。
