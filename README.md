@@ -7,11 +7,11 @@ npm-scripts で Sass を動かすハンズオンです。
 今回はダウンロードディレクトリに test-sass という作業ディレクトリを作成します。
 
 ```shell
-cd ~/Downloads && mkdir test-sass
+mkdir ~/Downloads/test-sass && cd ~/Downloads/test-sass
 ```
 
 上記コマンドの翻訳は
-「ダウンロードフォルダに移動したら、test-sass というフォルダを作れ」です。
+「ダウンロードフォルダに test-sass というフォルダを作れ、その後ダウンロード/test-sass/ に移動しろ」です。
 
 # 2. Node.js のバージョンを確認
 
@@ -155,7 +155,7 @@ sass --style=expanded --watch src/input.scss:styles/output.css
 # 7. 実際に Sass を動かしてみる　応用編 2
 
 では、下記のようなディレクトリ構造を想定した場合はどのように指定すれば良いのでしょうか。
-みなさんが、通常プロジェクトや特集などで使っている出るフォルダ構成に近い形です。
+みなさんが、通常使っている Sass のフォルダ構成に近い形です。
 
 ```
 .
@@ -200,6 +200,8 @@ sass --style=expanded --watch src:styles
 # 8. autoprefixer の実行
 
 autoprefixer は Can I Use の値を使って CSS を解析し、CSS ルールにベンダープレフィックスを追加する PostCSS プラグインです。
+
+IE 11 では `display: flex;` を使いたい場合はベンダープレフィックスをつけないとうまく動きません。
 
 ## インストール
 
@@ -275,3 +277,42 @@ map が不要な場合は --no-map オプションをつけます。
 ```
 npx postcss styles/**/*.css --use autoprefixer --replace --no-map
 ```
+
+8. NPM Scripts の実行
+
+これまでのように、都度ターミナルに長いコマンドを打ち込んでもいいのですが、コマンドをまとめたい時（繋いだり、直列処理したい時）は、NPM Scirpts を使うと便利です。
+
+NPM Scripts を使うには `package.json` にコマンドを記述します。
+
+```diff
+-   "scripts": {
+-     "test": "echo \"Error: no test specified\" && exit 1"
+-   },
++   "scripts": {
++     "sass": "sass --style=expanded --watch src:styles",
++     "autoprefixer": "npx postcss styles/**/*.css --use autoprefixer --replace --no-map"
++   },
+```
+
+先程、ターミナルで実行していたコマンドを JSON ファイルの Scripts オブジェクトに追記します。
+
+## 実行する
+
+Sass を実行するにはターミナルで
+
+```shell
+npm run sass
+```
+
+autoprefixer を実行するには
+
+```shell
+npm run autoprefixer
+```
+
+scripts が２つ程度ではさほど利点はないのですが、
+「書き出された CSS に後処理として、purge して mediaquery をソートして autoprefixer を実行したい」
+みたいな時に １つの短いコマンドで実行できる利点があります。
+
+もう一つ、利点としては
+コマンドを忘れ防止にもなります。

@@ -4,7 +4,8 @@
   "description": "npm-scripts で SASS を動かすハンズオンです。",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass --style=expanded --watch src:styles",
+    "autoprefixer": "npx postcss styles/**/*.css --use autoprefixer --replace --no-map"
   },
   "repository": {
     "type": "git",
